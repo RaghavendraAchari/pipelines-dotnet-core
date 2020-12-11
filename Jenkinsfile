@@ -10,25 +10,27 @@ pipeline{
       steps {
       git url:'https://github.com/RaghavendraAchari/pipelines-dotnet-core/', branch:'master'
       }
-    }
+  }
     
-    stage('Restore') {
-      steps {
-        bat "dotnet restore"
+  stage ('Restore PACKAGES') {     
+     steps {
+         bat "dotnet restore"
       }
-    }
-    
-    stage('Build') {
-      steps {
-        bat "dotnet build --configuration Release"
-      }
-    }
-    
-    stage('Publish') {
-      steps {
-        bat "dotnet publish  --configuration Release"
-      }
-    }
   }
 
+  stage('Build') {
+     steps {
+            bat 'dotnet build --configuration Release'
+      }
+  }
+    
+  stage('Publish') {
+     steps {
+           bat 'dotnet publish pipelines-dotnet-core.csproj -c Release'
+     }
+  }
+    
+  
 }
+
+
